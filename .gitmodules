@@ -33,6 +33,11 @@
 [submodule "components/spiffs/spiffs"]
 	path = components/spiffs/spiffs
 	url = https://github.com/pellepl/spiffs.git
+
 [submodule "components/wpc/libwpc"]
 	path = components/wpc/libwpc
 	url = https://github.com/flyingloft/wpc-for-esp-idf.git
+
+[submodule "components/curl/curl"]
+	path = components/curl/curl
+	url = https://github.com/curl/curl.git

@@ -1,0 +1,5 @@
+menuconfig CURL_LIBRARY
+    bool "CURL Library"
+    help
+       Select this option to enable support for the libcurl,
+       via the esp-idf component.

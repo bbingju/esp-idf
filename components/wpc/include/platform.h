@@ -31,6 +31,10 @@ void Platform_unlock_request(void);
 
 void Platform_close(void);
 
+void Platform_start_polling();
+
+void Platform_stop_polling();
+
 void Platform_change_polling_interval(unsigned int interval);
 
 #endif /* WPC_PLATFORM_H_ */

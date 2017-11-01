@@ -30,6 +30,7 @@ static SemaphoreHandle_t sending_mutex;
 static TaskHandle_t thread_polling;
 
 static TickType_t polling_interval = pdMS_TO_TICKS(DEFAULT_POLLING_INTERVAL_MS);
+static bool polling_stop = true;
 
 /*****************************************************************************/
 /*                Thread main loop implementation                            */
@@ -47,11 +48,8 @@ static void poll_for_indication(void * unused)
     {
         vTaskDelay(polling_interval);
 
-        /* if (does_request_exist()) { */
-        /*     res = do_request(); */
-        /* } else { */
-        res = WPC_Int_get_indication(MAX_NUMBER_INDICATION);
-        /* } */
+        if (polling_stop == false)
+            res = WPC_Int_get_indication(MAX_NUMBER_INDICATION);
     }
     // Cannot be reached
     LOGI("Exiting polling thread");
@@ -97,6 +95,16 @@ bool Platform_init(void)
 void Platform_close(void)
 {
     vTaskDelete(thread_polling);
+}
+
+void Platform_start_polling()
+{
+    polling_stop = false;
+}
+
+void Platform_stop_polling()
+{
+    polling_stop = true;
 }
 
 void Platform_change_polling_interval(unsigned int interval)

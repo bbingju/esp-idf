@@ -109,8 +109,8 @@ void Platform_stop_polling()
 
 void Platform_change_polling_interval(unsigned int interval)
 {
-    if (pdMS_TO_TICKS(interval) < pdMS_TO_TICKS(100))
-        interval = pdMS_TO_TICKS(100);
+    if (pdMS_TO_TICKS(interval) < pdMS_TO_TICKS(40))
+        interval = pdMS_TO_TICKS(40);
     else if (pdMS_TO_TICKS(interval) > pdMS_TO_TICKS(1000))
         interval = pdMS_TO_TICKS(1000);
     else

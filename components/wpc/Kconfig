@@ -7,7 +7,7 @@ menuconfig WIREPAS_LIBRARY
 config WIREPAS_UART_BUFSIZE
     int "Wirepas UART Buffer Size"
     depends on WIREPAS_LIBRARY
-    default 1024
-    range 64 1024
+    default 2048
+    range 64 2048
     help
 	uart RX/TX buffer size

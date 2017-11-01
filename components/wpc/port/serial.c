@@ -16,6 +16,7 @@
 
 
 #define WPC_UART_NUM           (UART_NUM_2) /* CONFIG_WPC_UART_NUM */
+
 #define WPC_SERIAL_TXD         (GPIO_NUM_17)
 #define WPC_SERIAL_RXD         (GPIO_NUM_16)
 #define WPC_SERIAL_RTS         (UART_PIN_NO_CHANGE)
@@ -35,7 +36,7 @@ static void uart_event_task(void *pvParameters)
         /* Waiting for UART event.
            If it happens then print out information what is it */
         if (xQueueReceive(uart2_queue, (void * )&event, (portTickType)portMAX_DELAY)) {
-            /* LOGI("uart[%d] event:", WPC_UART_NUM); */
+            LOGI("uart[%d] event:", WPC_UART_NUM);
             switch (event.type) {
             case UART_DATA:
                 /* Event of UART receiving data
@@ -46,7 +47,7 @@ static void uart_event_task(void *pvParameters)
                  */
                 /* uart_get_buffered_data_len(WPC_UART_NUM, &buffered_size); */
                 /* LOGI("data, len: %d; buffered len: %d", event.size, buffered_size); */
-		LOGD("data, len: %d", event.size);
+                LOGI("data, len: %d", event.size);
                 /* uart_read_bytes(WPC_UART_NUM, dtmp, event.size, 100 / portTICK_RATE_MS); */
                 break;
             case UART_FIFO_OVF:
@@ -98,13 +99,14 @@ int Serial_open(char* port_name)
     };
 
     uart_param_config(WPC_UART_NUM, &uart_config);
-    uart_set_pin(WPC_UART_NUM, 
-                 WPC_SERIAL_TXD, WPC_SERIAL_RXD, 
+    uart_set_pin(WPC_UART_NUM,
+                 WPC_SERIAL_TXD, WPC_SERIAL_RXD,
                  WPC_SERIAL_RTS, WPC_SERIAL_CTS);
     /* uart_driver_install(WPC_UART_NUM, BUF_SIZE * 2, BUF_SIZE * 2, 24, &uart2_queue, 0); */
-    uart_driver_install(WPC_UART_NUM, BUF_SIZE * 2, BUF_SIZE * 2, 0, NULL, 0);
 
     /* xTaskCreate(uart_event_task, "uart_event_task", 2048, NULL, 12, NULL); */
+
+    uart_driver_install(WPC_UART_NUM, BUF_SIZE * 2, BUF_SIZE * 2, 0, NULL, 0);
 
     LOGD("Serial opened");
     return 0;
@@ -126,6 +128,3 @@ int Serial_write(unsigned char * buffer, unsigned int buffer_size)
 {
     return uart_write_bytes(WPC_UART_NUM, (const char *) buffer, buffer_size);
 }
-
-
-

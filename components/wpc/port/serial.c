@@ -22,6 +22,7 @@
 #define WPC_SERIAL_CTS         (UART_PIN_NO_CHANGE)
 
 #define BUF_SIZE               CONFIG_WIREPAS_UART_BUFSIZE
+#define UART_BAUD_RATE         CONFIG_WIREPAS_UART_BAUD_RATE
 
 static QueueHandle_t uart2_queue;
 
@@ -89,7 +90,7 @@ static void uart_event_task(void *pvParameters)
 int Serial_open(char* port_name)
 {
     uart_config_t uart_config = {
-        .baud_rate = 115200,
+        .baud_rate = UART_BAUD_RATE,
         .data_bits = UART_DATA_8_BITS,
         .parity    = UART_PARITY_DISABLE,
         .stop_bits = UART_STOP_BITS_1,
@@ -125,4 +126,6 @@ int Serial_write(unsigned char * buffer, unsigned int buffer_size)
 {
     return uart_write_bytes(WPC_UART_NUM, (const char *) buffer, buffer_size);
 }
+
+
 

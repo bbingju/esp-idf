@@ -11,3 +11,11 @@ config WIREPAS_UART_BUFSIZE
     range 64 2048
     help
 	uart RX/TX buffer size
+
+config WIREPAS_UART_BAUD_RATE
+    int "Wirepas UART Buffer Baud Rate"
+    depends on WIREPAS_LIBRARY
+    default 115200
+    range 115200 921600
+    help
+	uart RX/TX baudrate

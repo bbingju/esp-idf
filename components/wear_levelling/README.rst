@@ -16,7 +16,7 @@ the :doc:`FAT filesystem </api-reference/storage/fatfs>`.
 
 The wear levelling component, together with FAT FS component, works with FAT FS sector size 4096
 bytes which is standard size of the flash devices. In this mode the component has best performance,
-but needs additional memoty in the RAM. To save internal memory the component has two additional modes
+but needs additional memory in the RAM. To save internal memory the component has two additional modes
 to work with sector size 512 bytes: Performance and Safety modes. In Performance mode by erase sector
 operation data will be stored to the RAM, sector will be erased and then data will be stored
 back to the flash. If by this operation power off situation will occur, the complete 4096 bytes

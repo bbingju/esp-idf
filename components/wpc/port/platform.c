@@ -78,12 +78,12 @@ bool Platform_init(void)
         return false;
     }
 
-    xTaskCreate(poll_for_indication,
-                "wpc_polling",
-                POLLING_THREAD_STACKSIZE,
-                NULL,
-                POLLING_THREAD_PRIO,
-                &thread_polling);
+    xTaskCreatePinnedToCore(poll_for_indication,
+                            "wpc_polling",
+                            POLLING_THREAD_STACKSIZE,
+                            NULL,
+                            POLLING_THREAD_PRIO,
+                            &thread_polling, 1);
     if (!thread_polling) {
         LOGE("xTaskCreate error");
         return false;

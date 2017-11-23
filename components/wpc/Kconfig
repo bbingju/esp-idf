@@ -19,3 +19,17 @@ config WIREPAS_UART_BAUD_RATE
     range 115200 921600
     help
 	uart RX/TX baudrate
+
+config WIREPAS_UART_GPIO_TXD
+    int "Wirepas UART TX Pin Number"
+    depends on WIREPAS_LIBRARY
+    default 10
+    help
+	UART TX pin number to connect the Wirepas Sink
+
+config WIREPAS_UART_GPIO_RXD
+    int "Wirepas UART RX Pin Number"
+    depends on WIREPAS_LIBRARY
+    default 9
+    help
+	UART RX pin number to connect the Wirepas Sink

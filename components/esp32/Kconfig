@@ -521,7 +521,8 @@ config INT_WDT
 config INT_WDT_TIMEOUT_MS
     int "Interrupt watchdog timeout (ms)"
     depends on INT_WDT
-    default 300
+    default 300 if !SPIRAM_SUPPORT
+    default 800 if SPIRAM_SUPPORT
     range 10 10000
     help
         The timeout of the watchdog, in miliseconds. Make this higher than the FreeRTOS tick rate.
@@ -762,7 +763,6 @@ config NO_BLOBS
 
 config ESP_TIMER_PROFILING
 	bool "Enable esp_timer profiling features"
-	depends on MAKING_ESP_TIMER_A_PUBLIC_API
 	default n
 	help
 		If enabled, esp_timer_dump will dump information such as number of times

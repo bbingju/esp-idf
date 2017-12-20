@@ -18,9 +18,9 @@
 #define MAX_NUMBER_INDICATION 3
 
 // Polling interval to check for indication
-#define DEFAULT_POLLING_INTERVAL_MS 500
+#define DEFAULT_POLLING_INTERVAL_MS 400
 
-#define POLLING_THREAD_PRIO         12 /* ( tskIDLE_PRIORITY + 2UL ) */
+#define POLLING_THREAD_PRIO         11
 #define POLLING_THREAD_STACKSIZE    4096
 
 // Mutex for sending, ie serial access
